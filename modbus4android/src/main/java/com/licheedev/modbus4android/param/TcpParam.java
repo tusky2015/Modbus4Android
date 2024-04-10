@@ -92,6 +92,8 @@ public class TcpParam implements ModbusParam<TcpParam> {
         ModbusMaster master = modbusFactory.createTcpMaster(mParameters, isKeepAlive());
         master.setRetries(getRetries());
         master.setTimeout(getTimeout());
+        // 设置两次接收数据超时时间，超过该时间清空缓冲区
+        master.setDiscardDataDelay(getTimeout());
         return master;
     }
 }

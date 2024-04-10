@@ -81,6 +81,8 @@ public class SerialParam implements ModbusParam<SerialParam> {
         ModbusMaster master = modbusFactory.createRtuMaster(wrapper);
         master.setRetries(getRetries());
         master.setTimeout(getTimeout());
+        // 设置两次接收数据超时时间，超过该时间清空缓冲区
+        master.setDiscardDataDelay(getTimeout());
 
         return master;
     }

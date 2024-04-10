@@ -1,6 +1,6 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.licheedev'
+group = 'com.github.tusky2015'
 version = '1.0'
 
 tasks.withType(JavaCompile) {
