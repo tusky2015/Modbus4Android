@@ -40,6 +40,8 @@ public class SerialParam implements ModbusParam<SerialParam> {
      */
     private int stopBits = 1;
 
+    private long mainThreadId = 0;
+
     private SerialParam() {
     }
 
@@ -48,6 +50,15 @@ public class SerialParam implements ModbusParam<SerialParam> {
         param.serialDevice = serialDevice;
         param.baudRate = baudRate;
         return param;
+    }
+
+    public long getMainThreadId() {
+        return mainThreadId;
+    }
+
+    public SerialParam setMainThreadId(long mainThreadId) {
+        this.mainThreadId = mainThreadId;
+        return this;
     }
 
     public int getTimeout() {
@@ -81,6 +92,7 @@ public class SerialParam implements ModbusParam<SerialParam> {
         ModbusMaster master = modbusFactory.createRtuMaster(wrapper);
         master.setRetries(getRetries());
         master.setTimeout(getTimeout());
+        master.setMainThreadId(getMainThreadId());
         // 设置两次接收数据超时时间，超过该时间清空缓冲区
         master.setDiscardDataDelay(getTimeout());
 
